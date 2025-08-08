@@ -1,0 +1,20 @@
+import requests
+from bs4 import BeautifulSoup
+from config import JOB_SITES
+
+def scrape_jobs():
+    jobs = []
+    headers = {"User-Agent": "Mozilla/5.0"}
+    for site in JOB_SITES:
+        try:
+            response = requests.get(site, headers=headers)
+            soup = BeautifulSoup(response.text, "html.parser")
+            links = soup.find_all("a", href=True)
+            for link in links:
+                title = link.get_text(strip=True)
+                url = link["href"]
+                if "Java" in title and "Developer" in title:
+                    jobs.append(f"{title} - {url}")
+        except Exception as e:
+            print(f"Error scraping {site}: {e}")
+    return jobs
