@@ -1,0 +1,6 @@
+git clone https://github.com/kumarponnuri111-lgtm/job-alert-daily.git
+cd job-alert-daily
+# Add files here (copy/paste or upload)
+git add .
+git commit -m "Add job alert automation files"
+git push origin main
