@@ -1,0 +1,30 @@
+name: Daily Job Alert
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # 6 AM UTC = 2 AM EDT
+  workflow_dispatch:
+
+jobs:
+  job-alert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Create config.py with secrets
+        run: |
+          echo "SEARCH_KEYWORDS='Java Full Stack Developer'" > config.py
+          echo "SEARCH_LOCATIONS=['USA', 'Remote']" >> config.py
+          echo "EMAIL_SENDER='${{ secrets.EMAIL_SENDER }}'" >> config.py
+          echo "EMAIL_PASSWORD='${{ secrets.EMAIL_PASSWORD }}'" >> config.py
+          echo "EMAIL_RECEIVER='${{ secrets.EMAIL_RECEIVER }}'" >> config.py
+          echo "JOB_SITES=['https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack%20Developer','https://www.indeed.com/jobs?q=Java+Full+Stack+Developer']" >> config.py
+      - name: Run job search
+        run: python main.py
