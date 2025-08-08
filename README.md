@@ -1,2 +1,22 @@
 # job-alert-daily
 job alerts 
+job-alert-daily/
+├── config.py
+├── job_scraper.py
+├── email_sender.py
+├── main.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+└── .github/
+    └── workflows/
+        └── job_alert.yml
+        SEARCH_KEYWORDS = "Java Full Stack Developer"
+SEARCH_LOCATIONS = ["USA", "Remote"]
+EMAIL_SENDER = "yourgmail@gmail.com"
+EMAIL_PASSWORD = "your-app-password"  # from Google App Passwords
+EMAIL_RECEIVER = "gangakumarponnuri@gmail.com"
+JOB_SITES = [
+    "https://www.linkedin.com/jobs/search/?keywords=Java%20Full%20Stack%20Developer",
+    "https://www.indeed.com/jobs?q=Java+Full+Stack+Developer",
+]
