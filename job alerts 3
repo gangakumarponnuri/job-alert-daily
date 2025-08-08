@@ -1,0 +1,6 @@
+from job_scraper import scrape_jobs
+from email_sender import send_email
+
+if __name__ == "__main__":
+    jobs = scrape_jobs()
+    send_email(jobs)
