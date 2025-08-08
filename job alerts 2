@@ -1,0 +1,15 @@
+import smtplib
+from email.mime.text import MIMEText
+from config import EMAIL_SENDER, EMAIL_PASSWORD, EMAIL_RECEIVER
+
+def send_email(job_list):
+    if not job_list:
+        job_list = ["No jobs found today."]
+    msg = MIMEText("\n".join(job_list))
+    msg["Subject"] = "Daily Java Full Stack Developer Jobs"
+    msg["From"] = EMAIL_SENDER
+    msg["To"] = EMAIL_RECEIVER
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(EMAIL_SENDER, EMAIL_PASSWORD)
+        server.sendmail(EMAIL_SENDER, EMAIL_RECEIVER, msg.as_string())
